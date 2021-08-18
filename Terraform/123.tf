@@ -22,8 +22,11 @@ terraform {
 # Configure the AWS Provider
 provider "aws" {
   region = "us-east-1"
-#  access_key = "111111111"
-#  secret_key = "1111111"
+#  access_key = ""
+#  secret_key = ""
+#  export AWS_ACCESS_KEY_ID=""
+#  export AWS_SECRET_ACCESS_KEY=""
+#
 }
 
 # Create a VPC
@@ -162,8 +165,8 @@ output "server_public_ip" {
 
 
 
-resource "aws_instance" "web-server-instance"{
-    ami = "ami-0747bdcabd34c712a"
+resource "aws_instance" "server-instance"{
+    ami = "ami-0c2b8ca1dad447f8a"
     instance_type = "t2.micro"
     availability_zone = "us-east-1a"
     key_name = "key1"
@@ -173,14 +176,14 @@ resource "aws_instance" "web-server-instance"{
       network_interface_id = aws_network_interface.web-server-nic.id
     }
 
-    user_data = <<-EOF
-                #!/bin/bash
-                sudo apt update -y
-                sudo apt install apache2 -y
-                sudo systemctl start apache2
-                sudo bash -c 'echo you web server > /var/www/html/index.html'
-                EOF
+#    user_data = <<-EOF
+#                #!/bin/bash
+#                sudo apt update -y
+#                sudo apt install apache2 -y
+#                sudo systemctl start apache2
+#                sudo bash -c 'echo you web server > /var/www/html/index.html'
+#                EOF
     tags = {
-      Name = "web-server"
+      Name = "server"
     }
 }
