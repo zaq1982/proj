@@ -1,0 +1,24 @@
+---
+- name: install soft
+  hosts: ec2
+  tasks:
+    - name: upgrade all packages
+      yum: name=* state=latest
+
+
+    - name: install packages
+      yum:
+        name: 
+          - polkit
+          - httpd
+          - python3
+        state: present
+        lock_timeout: 180
+
+    - name: start httpd
+      service:
+        name: httpd
+        state: started
+        enabled: true  
+
+ 

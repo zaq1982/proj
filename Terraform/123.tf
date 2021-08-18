@@ -158,10 +158,26 @@ resource "aws_eip" "myVPC-eip-one" {
   depends_on = [aws_internet_gateway.myVPC-igw]
 }
 
+# Print Public IP
 output "server_public_ip" {
   value       = aws_eip.myVPC-eip-one.public_ip
   
 }
+
+
+# Create inventory file for ansible
+resource "local_file" "inventory" {
+  filename = "../Ansible/inventory"
+  content = <<EOF
+[ec2]
+${aws_eip.myVPC-eip-one.public_ip}
+[ec2:vars]
+ansible_ssh_private_key_file=key1.pem
+ansible_user=ec2-user
+EOF
+}
+
+
 
 
 
