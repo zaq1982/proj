@@ -11,6 +11,8 @@ pipeline {
                       export AWS_SECRET_ACCESS_KEY=$secret2
                       cd Terraform && pwd
                       PATH=/usr/local/bin
+                      terraform init
+                      terraform plan
                     '''
                     
                 }
@@ -19,11 +21,10 @@ pipeline {
                 
             }
         }
-        stage('Terraform Init and Plan') {
+        stage('Ansible apply') {
             steps {
                 sh '''
-                  terraform init
-                  terraform plan
+                 cd Ansible && pwd
                 '''
             }
         }
