@@ -5,21 +5,17 @@ pipeline {
         stage('Terraform apply') {
             steps {
                 sh 'pwd'
-                withCredentials([string(credentialsId: 'sec1', variable: 'secret'), string(credentialsId: 'sec2', variable: 'secret2')]) {
+                withCredentials([string(credentialsId: 'sec1', variable: 'AWSID'), string(credentialsId: 'sec2', variable: 'AWSKEY')]) {
                     sh '''
-                      export AWS_ACCESS_KEY_ID=$secret
-                      export AWS_SECRET_ACCESS_KEY=$secret2
+                      export AWS_ACCESS_KEY_ID=$AWSID
+                      export AWS_SECRET_ACCESS_KEY=$AWSKEY
                       cd Terraform && pwd
                       PATH=/usr/local/bin
                       terraform init
                       terraform plan
                       terraform apply --auto-approve
                     '''
-                    
                 }
-                
-                
-                
             }
         }
         stage('Ansible apply') {
