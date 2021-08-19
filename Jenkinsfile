@@ -26,6 +26,7 @@ pipeline {
             steps {
                 sh '''
                  cd Ansible && pwd
+                 chmod 400 key1.pem
                  ansible-playbook -i inventory playbook.yml -v
                 '''
             }
