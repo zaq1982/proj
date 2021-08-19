@@ -1,5 +1,5 @@
 ---
-- name: install soft
+- name: install
   hosts: ec2
   tasks:
     - name: upgrade all packages
@@ -12,6 +12,7 @@
           - polkit
           - httpd
           - python3
+          - tree
         state: present
         lock_timeout: 180
 
