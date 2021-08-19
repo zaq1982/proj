@@ -11,6 +11,7 @@ pipeline {
                       export AWS_SECRET_ACCESS_KEY=$AWSKEY
                       cd Terraform && pwd
                       PATH=/usr/local/bin
+                      terraform version
                       terraform init
                       terraform plan
                       terraform apply --auto-approve
