@@ -26,6 +26,7 @@ pipeline {
             steps {
                 sh '''
                  cd Ansible && pwd
+                 ansible-playbook -i inventory playbook.yml -v
                 '''
             }
         }
