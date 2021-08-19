@@ -13,6 +13,7 @@ pipeline {
                       PATH=/usr/local/bin
                       terraform init
                       terraform plan
+                      terraform apply --auto-approve
                     '''
                     
                 }
